@@ -3,6 +3,8 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:yearless_calendar/utils.dart';
 import 'package:yearless_calendar/yearless_calendar.dart';
 
 void main() {
@@ -14,48 +16,122 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Yearless Calendar Demo',
-      home: MyHomePage(),
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0x9f4376f8),
+      ),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
   });
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late CalendarMonth? selectedMonth;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Init yearless calendar locale
+    initializeDateFormatting();
+    selectedMonth =
+        CalendarUtils.convertDateToCalendarMonth(DateTime.now(), "mr_IN");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final calculator = Calculator();
     return Scaffold(
       appBar: AppBar(
         title: const Text('yearless_calendar example'),
         elevation: 4,
       ),
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Adds one to input values',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Calendar Month Switcher',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
-          ),
-          ListTile(
-            title: const Text('Calculate addOne on 2'),
-            subtitle: Text('Answer is ${calculator.addOne(2)}'),
-          ),
-          ListTile(
-            title: const Text('Calculate addOne on -7'),
-            subtitle: Text('Answer is ${calculator.addOne(-7)}'),
-          ),
-          ListTile(
-            title: const Text('Calculate addOne on 0'),
-            subtitle: Text('Answer is ${calculator.addOne(0)}'),
-          ),
-        ],
+            Text(
+              'Same horizontal width'.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    selectedMonth!.name,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  )),
+                  Expanded(
+                    child: MonthSwitcher(
+                      selectedMonth: selectedMonth,
+                      locale: "mr",
+                      onMonthChange: (month) => setState(() {
+                        selectedMonth = month;
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 20.0),
+            Text(
+              'Fixed width aligned space between'.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    selectedMonth!.name,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  SizedBox(
+                    width: 170.0,
+                    child: MonthSwitcher(
+                      selectedMonth: selectedMonth,
+                      locale: "mr",
+                      onMonthChange: (month) => setState(() {
+                        selectedMonth = month;
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 20.0),
+            Text('Full width widget'.toUpperCase(),
+                style: Theme.of(context).textTheme.labelSmall),
+            const MonthSwitcher(),
+            const Divider(height: 20.0),
+            Text(
+              'Fixed width widget'.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            const SizedBox(
+              width: 170.0,
+              child: MonthSwitcher(),
+            ),
+          ],
+        ),
       ),
     );
   }
