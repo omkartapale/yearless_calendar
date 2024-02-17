@@ -61,6 +61,65 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
+                'Selected Date Widget',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+            SelectedDate(
+              date: DateTime(2024),
+              locale: 'mr_IN',
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              'Display in a row with month switcher'.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SelectedDate(
+                      // Known Bug / Limitation: Just for reference
+                      //
+                      // No worries as we are not changing selected date
+                      // state on month switch. We'll show dates for changed
+                      // month and once user selects one of those dates then
+                      // only we'll update selected date state of widget.
+                      //
+                      // If less dates in changed month like switch from Jan 31
+                      // to Feb or Jan 30 to Feb or March 31 to Apr.
+                      //
+                      // In such cases last date of changed month should be set.
+                      //
+                      // Create a function in utils that receives date, updated
+                      // month and return first or last date of month param
+                      // and validates date and return date in respect to params.
+                      // And use this function to change date programmatically.
+                      //
+                      // date: DateTime(2024, 1, 31)
+                      //     .copyWith(month: selectedMonth!.monthNum),
+                      date: DateTime(2024, 2, 20)
+                          .copyWith(month: selectedMonth!.monthNum),
+                      locale: 'mr_IN',
+                    ),
+                  ),
+                  Expanded(
+                    child: MonthSwitcher(
+                      selectedMonth: selectedMonth,
+                      locale: "mr",
+                      onMonthChange: (month) => setState(() {
+                        selectedMonth = month;
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
                 'Calendar Month Switcher',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
@@ -118,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             const Divider(height: 20.0),
-            Text('Full width widget'.toUpperCase(),
+            Text('Fluid full width widget'.toUpperCase(),
                 style: Theme.of(context).textTheme.labelSmall),
             const MonthSwitcher(),
             const Divider(height: 20.0),

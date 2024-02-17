@@ -6,3 +6,4 @@
 library yearless_calendar;
 
 export 'src/widgets/month_switcher_widget.dart';
+export 'src/widgets/selected_date_widget.dart';
