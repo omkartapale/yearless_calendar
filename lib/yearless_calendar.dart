@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-/// Yearless Calendar library
+/// Yearless Calendar library.
 library yearless_calendar;
 
+export 'src/widgets/day_widget.dart';
 export 'src/widgets/month_switcher_widget.dart';
 export 'src/widgets/selected_date_widget.dart';

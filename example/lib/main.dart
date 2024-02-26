@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
       title: 'Yearless Calendar Demo',
       theme: ThemeData(
         colorSchemeSeed: const Color(0x9f4376f8),
+        // brightness: Brightness.dark,
       ),
       home: const MyHomePage(),
     );
@@ -50,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    const bool landscapeMode = false;
+    const DayStructure dayStructure = DayStructure.dayDateMonth;
+    late String? dayLocale;
+    dayLocale = 'en';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('yearless_calendar example'),
@@ -58,6 +64,72 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Month Date Widget',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              height: 120,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Day(
+                    date: DateTime.now().subtract(const Duration(days: 3)),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    isDisabled: true,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                  const SizedBox(width: 8.0),
+                  Day(
+                    date: DateTime.now().subtract(const Duration(days: 2)),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                  const SizedBox(width: 8.0),
+                  Day(
+                    date: DateTime.now().subtract(const Duration(days: 1)),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    isSelected: true,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                  const SizedBox(width: 8.0),
+                  Day(
+                    date: DateTime.now(),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                  const SizedBox(width: 8.0),
+                  Day(
+                    date: DateTime.now().add(const Duration(days: 1)),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                  const SizedBox(width: 8.0),
+                  Day(
+                    date: DateTime.now().add(const Duration(days: 2)),
+                    locale: dayLocale,
+                    isLandscape: landscapeMode,
+                    dayStructure: dayStructure,
+                    onDayPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 20.0),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
