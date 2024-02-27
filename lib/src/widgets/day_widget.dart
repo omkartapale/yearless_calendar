@@ -220,6 +220,7 @@ class Day extends StatelessWidget {
         alignment: Alignment.center,
         fit: BoxFit.scaleDown,
         child: Text(
+          key: const Key('dateElementText'),
           CalendarFormatter.customDateFormat(date, 'dd', locale),
           style: dayNumStyle,
         ),
@@ -263,6 +264,7 @@ class Day extends StatelessWidget {
         alignment: Alignment.center,
         fit: BoxFit.scaleDown,
         child: Text(
+          key: const Key('dayElementText'),
           CalendarFormatter.dayShortName(date, locale).toUpperCase(),
           style: dayStrStyle,
         ),
@@ -353,6 +355,7 @@ class Day extends StatelessWidget {
         alignment: Alignment.center,
         fit: BoxFit.scaleDown,
         child: Text(
+          key: const Key('monthElementText'),
           CalendarFormatter.monthShortName(date, locale).toUpperCase(),
           style: monthStyle,
         ),
