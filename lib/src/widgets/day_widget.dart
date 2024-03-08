@@ -14,7 +14,7 @@ import '../../utils.dart';
 /// The [height] and [width] can also adjusted. The details can displayed in a row
 /// or column form with configurable [isLandscape] mode.
 ///
-/// A callback can configured with [onDayPressed] void callback.
+/// A callback can configured with [onPressed] void callback.
 class Day extends StatelessWidget {
   /// The date of the month that to be displayed in the day widget.
   final DateTime date;
@@ -37,7 +37,7 @@ class Day extends StatelessWidget {
   final bool isDisabled;
 
   /// A callback function that is called when the day widget is pressed.
-  final VoidCallback onDayPressed;
+  final VoidCallback onPressed;
 
   /// A boolean config to define if the elements of day widget to be shown in
   /// landscape fashion i.e. in a row.
@@ -70,7 +70,7 @@ class Day extends StatelessWidget {
     this.isLandscape = false,
     this.width = 60.0,
     this.height = 120.0,
-    required this.onDayPressed,
+    required this.onPressed,
   });
 
   @override
@@ -87,7 +87,7 @@ class Day extends StatelessWidget {
 
     return InkWell(
       // If a day marked as disabled, then it should not be clickable.
-      onTap: isDisabled ? null : onDayPressed,
+      onTap: isDisabled ? null : onPressed,
 
       // splashColor: Theme.of(context).splashColor,
       // highlightColor: Theme.of(context).primaryColor,

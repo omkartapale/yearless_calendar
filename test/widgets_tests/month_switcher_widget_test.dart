@@ -80,7 +80,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MonthSwitcher(
-              onMonthChange: (month) => {callbackEmittedMonth = month},
+              onChanged: (month) => {callbackEmittedMonth = month},
             ),
           ),
         ),
@@ -113,7 +113,7 @@ void main() {
           home: Scaffold(
             body: MonthSwitcher(
               selectedMonth: currentMonth,
-              onMonthChange: (month) => {callbackEmittedMonth = month},
+              onChanged: (month) => {callbackEmittedMonth = month},
             ),
           ),
         ),
@@ -141,7 +141,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MonthSwitcher(
-              onMonthChange: (month) => {callbackEmittedMonth = month},
+              onChanged: (month) => {callbackEmittedMonth = month},
             ),
           ),
         ),
@@ -179,7 +179,7 @@ void main() {
           home: Scaffold(
             body: MonthSwitcher(
               selectedMonth: currentMonth,
-              onMonthChange: (month) => {callbackEmittedMonth = month},
+              onChanged: (month) => {callbackEmittedMonth = month},
             ),
           ),
         ),

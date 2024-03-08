@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../utils/calendar_utils.dart';
 import '../widgets/day_widget.dart';
 
-/// Signature for [MonthlyCalendar.onSelectedDateChanged]
+/// Signature for [MonthlyCalendar.onSelectedDateChanged].
 ///
 /// The callback takes a [DateTime] instance representing the selected date
 /// as a parameter.
@@ -281,7 +281,7 @@ class _MonthlyCalendarState extends State<MonthlyCalendar> {
               isLandscape: widget.isLandscape,
               width: widget.dayWidth,
               height: widget.dayHeight,
-              onDayPressed: () => {
+              onPressed: () => {
                 setState(() {
                   _selectedDate = currentDate;
                 }),

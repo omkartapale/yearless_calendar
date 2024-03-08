@@ -6,25 +6,17 @@ import 'package:flutter/material.dart';
 
 import '../../utils.dart';
 
-/// A function type that takes an optional [CalendarMonth] object representing
-/// the selected month as a parameter and returns no result.
+/// Signature for [MonthSwitcher.onChanged].
+///
+/// The callback takes an optional [CalendarMonth] instance representing the
+/// selected month as a parameter.
 ///
 /// Used by [YearlessCalendar] for detecting changes in the selected month.
-typedef OnMonthChangeCallback = void Function(CalendarMonth? month);
+typedef MonthChangedCallback = void Function(CalendarMonth? month);
 
 /// A widget that displays selected month and buttons for switching through
 /// previous or next month.
 class MonthSwitcher extends StatefulWidget {
-  /// Constructs a month switcher widget with the specified properties.
-  const MonthSwitcher({
-    super.key,
-    this.locale,
-    this.selectedMonth,
-    this.style,
-    this.shortenedName,
-    this.onMonthChange,
-  });
-
   /// A locale code config used for formatting and parsing the months.
   ///
   /// This property can be null. Defaults to en_US locale.
@@ -50,8 +42,24 @@ class MonthSwitcher extends StatefulWidget {
   /// displayed.
   final bool? shortenedName;
 
-  /// An optional callback function to call when the selected month changes.
-  final OnMonthChangeCallback? onMonthChange;
+  /// An optional callback that is invoked when the selected month changes, to
+  /// report the change in the selected month.
+  ///
+  /// The callback takes an optional [CalendarMonth] instance as its parameter,
+  /// which represents the new selected month. It's preferred to use
+  /// [MonthChangedCallback] to get new selected month through a callback's
+  /// [CalendarMonth] instance parameter.
+  final MonthChangedCallback? onChanged;
+
+  /// Constructs a month switcher widget with the specified properties.
+  const MonthSwitcher({
+    super.key,
+    this.locale,
+    this.selectedMonth,
+    this.style,
+    this.shortenedName,
+    this.onChanged,
+  });
 
   @override
   State<MonthSwitcher> createState() => _MonthSwitcherState();
@@ -61,24 +69,11 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
   late List<CalendarMonth> _yearMonths = [];
   late int _currentMonth = 0;
 
-  @override
-  void initState() {
-    super.initState();
-
-    // initialize months of calendar
-    _yearMonths = CalendarUtils.getYearMonths(
-        DateTime.now(), widget.locale, widget.shortenedName ?? false);
-    // initialize current month according to selected month param
-    _currentMonth = widget.selectedMonth != null
-        ? ((widget.selectedMonth!.monthNum - 1))
-        : 0;
-  }
+  /// Getter method to detect current month is first month of year.
+  bool get _isFirstMonth => _currentMonth == 0;
 
   /// Getter method to detect current month is last month of year.
   bool get _isLastMonth => _currentMonth == _yearMonths.length - 1;
-
-  /// Getter method to detect current month is first month of year.
-  bool get _isFirstMonth => _currentMonth == 0;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +90,7 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
             setState(() {
               _currentMonth--;
             });
-            widget.onMonthChange?.call(_yearMonths[_currentMonth]);
+            widget.onChanged?.call(_yearMonths[_currentMonth]);
           },
           icon: Icon(
             Icons.arrow_back_ios_rounded,
@@ -120,7 +115,7 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
             setState(() {
               _currentMonth++;
             });
-            widget.onMonthChange?.call(_yearMonths[_currentMonth]);
+            widget.onChanged?.call(_yearMonths[_currentMonth]);
           },
           icon: Icon(
             Icons.arrow_forward_ios_rounded,
@@ -129,5 +124,18 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // initialize months of calendar
+    _yearMonths = CalendarUtils.getYearMonths(
+        DateTime.now(), widget.locale, widget.shortenedName ?? false);
+    // initialize current month according to selected month param
+    _currentMonth = widget.selectedMonth != null
+        ? ((widget.selectedMonth!.monthNum - 1))
+        : 0;
   }
 }

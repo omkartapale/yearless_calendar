@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     isLandscape: landscapeMode,
                     isDisabled: true,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8.0),
                   Day(
@@ -135,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     locale: dayLocale,
                     isLandscape: landscapeMode,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8.0),
                   Day(
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     isLandscape: landscapeMode,
                     isSelected: true,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8.0),
                   Day(
@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     locale: dayLocale,
                     isLandscape: landscapeMode,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8.0),
                   Day(
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     locale: dayLocale,
                     isLandscape: landscapeMode,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                   const SizedBox(width: 8.0),
                   Day(
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     locale: dayLocale,
                     isLandscape: landscapeMode,
                     dayStructure: dayStructure,
-                    onDayPressed: () {},
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -224,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: MonthSwitcher(
                       selectedMonth: selectedMonth,
                       locale: "mr",
-                      onMonthChange: (month) => setState(() {
+                      onChanged: (month) => setState(() {
                         selectedMonth = month;
                       }),
                     ),
@@ -257,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: MonthSwitcher(
                       selectedMonth: selectedMonth,
                       locale: "mr",
-                      onMonthChange: (month) => setState(() {
+                      onChanged: (month) => setState(() {
                         selectedMonth = month;
                       }),
                     ),
@@ -284,7 +284,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: MonthSwitcher(
                       selectedMonth: selectedMonth,
                       locale: "mr",
-                      onMonthChange: (month) => setState(() {
+                      onChanged: (month) => setState(() {
                         selectedMonth = month;
                       }),
                     ),

@@ -18,7 +18,7 @@ void main() {
           home: Scaffold(
             body: Day(
               date: DateTime(2024),
-              onDayPressed: () {},
+              onPressed: () {},
             ),
           ),
         ),
@@ -52,7 +52,7 @@ void main() {
           home: Scaffold(
             body: Day(
               date: DateTime(2024),
-              onDayPressed: () {},
+              onPressed: () {},
               locale: 'mr_IN',
             ),
           ),
@@ -87,7 +87,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {
+                onPressed: () {
                   callbackTriggered = true;
                 },
               ),
@@ -120,7 +120,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {
+                onPressed: () {
                   callbackTriggered = true;
                 },
                 isDisabled: true,
@@ -156,7 +156,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {},
+                onPressed: () {},
                 dayStructure: DayStructure.dateDay,
               ),
             ),
@@ -199,7 +199,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {},
+                onPressed: () {},
                 dayStructure: DayStructure.dateOnly,
               ),
             ),
@@ -240,7 +240,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {},
+                onPressed: () {},
                 dayStructure: DayStructure.dayDate,
               ),
             ),
@@ -284,7 +284,7 @@ void main() {
             home: Scaffold(
               body: Day(
                 date: DateTime(2024),
-                onDayPressed: () {},
+                onPressed: () {},
                 dayStructure: DayStructure.monthDateDay,
               ),
             ),
