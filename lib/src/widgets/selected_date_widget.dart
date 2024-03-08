@@ -49,32 +49,6 @@ class SelectedDate extends StatelessWidget {
   /// Returns formatted date representing the selected [date] with the
   /// specified [locale].
   String _getFormattedDate() {
-    // TODO: Known Bug / Limitation:
-    //
-    // No worries as of now. We'll investigate further once we reach to
-    // completion of final yearless calendar widget.
-    //
-    // What if user's device currently (at the time of execution of app) is in
-    // non-leap year but selects to show leap year calendar for february month,
-    // this will lead to provide wrong day name or wrong date, as we are planning
-    // to show day according to current calendar year but dates according to
-    // configured leap-year setting in yearless calendar widget.
-    //
-    // Here need to handle such events, as day names will be shown for current
-    // year and this will result in flaw in yearless widget.
-    //
-    // Also we're going to create a configuration to control leap year setting in
-    // main widget, which can also be used to check here.
-    //
-    // If we set date to 2023/02/29 which doesn't exist as non-leap year, and
-    // used SelectedDateFormat, then the result will be 1 March.
-    // It's changing the date as in parent as DateTime doesn't take this date
-    // and adds 1 day to it so it becomes 1 March.
-    //
-    // Our expectation is to set day name to empty and provide formatted date.
-    // We can overrride formatting function to check such event and alternate
-    // formatting function for such case.
-    //
     return CalendarFormatter.customDateFormat(
       date,
       format.pattern,

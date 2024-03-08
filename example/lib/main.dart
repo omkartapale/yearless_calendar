@@ -39,6 +39,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late CalendarMonth? selectedMonth;
 
+  late DateTime? selectedDate;
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
     initializeDateFormatting();
     selectedMonth =
         CalendarUtils.convertDateToCalendarMonth(DateTime.now(), "mr_IN");
+
+    selectedDate = DateTime.now();
   }
 
   @override
@@ -67,7 +71,47 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Month Date Widget',
+                'Monthly Calendar Widget',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+            MonthlyCalendar(
+              month: DateTime.february,
+              selectedDate: DateTime(2024, 2, 29),
+              isLandscape: true,
+              // isLeapyear: false,
+              // daySeparatorMargin: 20.0,
+              dayStructure: DayStructure.monthDateDay,
+            ),
+            const SizedBox(height: 20.0),
+            SelectedDate(
+              date: selectedDate!,
+              locale: 'mr_IN',
+              format: SelectedDateFormat.shortDayShortDate,
+            ),
+            const SizedBox(height: 20.0),
+            Text(
+              'With month switcher'.toUpperCase(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            MonthlyCalendar(
+              month: selectedMonth!.monthNum,
+              locale: 'mr_IN',
+              selectedDate: DateTime.now()
+                  .copyWith(month: selectedMonth!.monthNum, day: 12),
+              disabledDates: CalendarUtils.getYearMonths(DateTime.now())
+                  .map((e) =>
+                      DateTime.now().copyWith(month: e.monthNum, day: 13))
+                  .toList(),
+              onSelectedDateChanged: (newSelectedDate) => setState(() {
+                selectedDate = newSelectedDate;
+              }),
+            ),
+            const Divider(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Day Widget List',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
